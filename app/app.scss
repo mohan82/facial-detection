@@ -1,0 +1,10 @@
+html,body {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  @include outer-container;
+  text-align: center;
+}
+
