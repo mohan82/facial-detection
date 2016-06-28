@@ -26,7 +26,7 @@ export default class FacialDetection extends React.Component {
            MediaHelper.requestAnimationFrame(this.drawCanvas.bind(this));
             cc.clearRect(0, 0, canvasInput.width, canvasInput.height);
             console.log(this.clm.draw(canvasInput));
-        console.log(this.clm.getCurrentPosition())
+        console.log(this.clm.getCurrentPosition().length)
 
     }
 
@@ -46,11 +46,14 @@ export default class FacialDetection extends React.Component {
 
     render() {
         return (
-            <div className="face-container">
-                <video id="videoel" ref="facialVideo" autoplay>
-                </video>
-                <canvas ref="facialCanvas"></canvas>
+            <div className="facial-content">
+                <div className="face-container">
+                    <video  ref="facialVideo"  preload="auto" loop>
+
+                    </video>
+                    <canvas  ref="facialCanvas"></canvas>
             </div>
+           </div>
             );  
     }
 }
