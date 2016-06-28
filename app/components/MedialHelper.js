@@ -4,7 +4,7 @@ let MedialHelper = {};
 
 MedialHelper.URL = window.URL || window.webkitURL;
 
-MedialHelper.requestAnimationFrame = function (callback, element) {
+    MedialHelper.requestAnimationFrame = function (callback, element) {
     var requestAnimationFrame =
         window.requestAnimationFrame ||
         window.webkitRequestAnimationFrame ||

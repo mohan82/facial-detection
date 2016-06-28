@@ -3,16 +3,31 @@ import React, {
 } from 'react';
 import  MediaHelper from './MedialHelper';
 import EyeDetector from './EyeDetector';
-
+import ClmTrackerAdapter from '../adapters/ClmTrackerAdapter.jsx'
 export default class FacialDetection extends React.Component {
     constructor(props) {
         super(props);
+        this.clm= new ClmTrackerAdapter();
+
     }
 
     componentDidMount() {
         this.playVideo(this.refs.facialVideo);
-        this.eyedetector = new EyeDetector(this.refs.facialVideo, this.refs.facialCanvas);
-        this.eyedetector.detectEye();
+        this.clm.init(pModel);
+        this.refs.facialVideo.width =$(this.refs.facialVideo).width()
+        this.refs.facialVideo.height=$(this.refs.facialVideo).height()
+        this.clm.start(this.refs.facialVideo);
+        this.drawCanvas();
+    }
+
+    drawCanvas(){
+        var canvasInput = $(this.refs.facialCanvas)[0];
+        var cc = canvasInput.getContext('2d');
+           MediaHelper.requestAnimationFrame(this.drawCanvas.bind(this));
+            cc.clearRect(0, 0, canvasInput.width, canvasInput.height);
+            console.log(this.clm.draw(canvasInput));
+        console.log(this.clm.getCurrentPosition())
+
     }
 
     playVideo(video) {
@@ -31,13 +46,12 @@ export default class FacialDetection extends React.Component {
 
     render() {
         return (
-            <div id="face-container">
+            <div className="face-container">
                 <video id="videoel" ref="facialVideo" autoplay>
                 </video>
-                <canvas ref="facialCanvas" id="overlay"></canvas>
+                <canvas ref="facialCanvas"></canvas>
             </div>
-
-        );
+            );  
     }
 }
 

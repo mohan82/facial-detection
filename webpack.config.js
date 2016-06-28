@@ -2,12 +2,12 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var path = require('path');
 var assetsDir = path.resolve(__dirname, 'public/assets');
-
+    
 var config = {
 
     entry: {
         "app": ['./app/index.js'],
-        "vendor": ["objectdetect", "objectdetectFace", "objectdetectEye"]
+        "vendor": ["clm",'pModel']
     },
     devtool: 'source-map',
     output: {
@@ -30,6 +30,9 @@ var config = {
             }, {
                 test: /index.html$/,
                 loader: "file?name=[name].[ext]",
+            }, {
+                test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
+                loader: 'url?limit=100000@name=[name][ext]'
             }
         ]
     },
@@ -69,6 +72,8 @@ function provideQuery() {
     return new webpack.ProvidePlugin({
         $: 'jquery',
         jQuery: 'jquery',
+        clm:'clm',
+        pModel:'pModel',
         objectdetect: 'objectdetect',
         objectdetectEye: 'objectdetectEye',
         objectdetectFace: 'objectdetectFace',
