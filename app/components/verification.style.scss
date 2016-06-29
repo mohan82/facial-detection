@@ -1,0 +1,36 @@
+.verificationSuccess {
+  text-align: center;
+  margin-bottom: 20px;
+
+  .tick {
+    display: block;
+    text-align: center;
+
+    i {
+      border:1px solid $success-colour;
+      border-radius: 50%;
+      color:$success-colour;
+      font-size: 11em;
+
+
+    }
+  }
+}
+
+.inactive {
+  visibility: hidden;
+}
+
+.spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1000;
+  div {
+    margin-top:10px;
+  }
+}
+
+.active {
+  visibility: visible;
+}

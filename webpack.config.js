@@ -2,7 +2,9 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var path = require('path');
 var assetsDir = path.resolve(__dirname, 'public/assets');
-    
+var precss = require('precss');
+var autoprefixer = require('autoprefixer');
+
 var config = {
 
     entry: {
@@ -27,24 +29,23 @@ var config = {
             }, {
                 test: /\.scss$/,
                 loader: 'style!css!postcss!sass'
-            }, {
-                test: /index.html$/,
-                loader: "file?name=[name].[ext]",
-            }, {
+            },{
+                test: /\.css$/,
+                loader: 'style!css!postcss'
+            },{
                 test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
                 loader: 'url?limit=100000@name=[name][ext]'
             }
         ]
     },
+    postcss: function () {
+        return [precss, autoprefixer];
+    },
     resolve: {
         root: path.resolve('./app'),
         alias: {
             'clm': path.resolve('./app/vendor/js/clmtrackr.js'),
-            'pModel': path.resolve('./app/vendor/js/model_pca_20_svm.js'),
-            'objectdetect': path.resolve('./app/vendor/js/objectdetect/objectdetect.js'),
-            'objectdetectFace': path.resolve('./app/vendor/js/objectdetect/objectdetect.frontalface.js'),
-            'objectdetectEye': path.resolve('./app/vendor/js/objectdetect/objectdetect.eye.js'),
-            'smoother': path.resolve('./app/vendor/js/objectdetect/smoother.js')
+            'pModel': path.resolve('./app/vendor/js/model_pca_20_svm.js')
         }
     },
     plugins: [
@@ -73,12 +74,7 @@ function provideQuery() {
         $: 'jquery',
         jQuery: 'jquery',
         clm:'clm',
-        pModel:'pModel',
-        objectdetect: 'objectdetect',
-        objectdetectEye: 'objectdetectEye',
-        objectdetectFace: 'objectdetectFace',
-        smoother: 'smoother'
-
+        pModel:'pModel'
     });
 }
 module.exports = config;
